@@ -1563,11 +1563,721 @@ main{min-width:0}
 .footer-col a:hover{color:#ddd5ca}
 .logo-btn{display:inline-flex;align-items:center;text-decoration:none}
 .header-action{text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+
+/* === Final navigation, cursor, scrollbar, and mobile cleanup === */
+
+/* Desktop header alignment */
+.topnav{
+  align-items:stretch !important;
+}
+.topnav > .top-link{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  height:84px !important;
+  line-height:1 !important;
+  padding-top:0 !important;
+  padding-bottom:0 !important;
+}
+.nav-item{
+  height:84px !important;
+}
+.nav-item > .drop-toggle{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  height:84px !important;
+  line-height:1 !important;
+}
+.top-link.active::after,
+.nav-item > button.active::after{
+  bottom:0 !important;
+}
+
+/* Custom desktop cursor */
+@media (hover:hover) and (pointer:fine){
+  body, a, button, .route, .pf-card, .portfolio-item, .division-band, .choice, .radio-choice{
+    cursor:none !important;
+  }
+  .site-cursor{
+    position:fixed;
+    left:0; top:0;
+    width:16px; height:16px;
+    border:1px solid rgba(200,164,85,.9);
+    border-radius:50%;
+    transform:translate(-50%,-50%);
+    pointer-events:none;
+    z-index:100000;
+    opacity:0;
+    transition:width .16s ease,height .16s ease,background .16s ease,border-color .16s ease,opacity .12s ease;
+  }
+  .site-cursor::after{
+    content:"";
+    position:absolute;
+    width:3px;height:3px;
+    left:50%;top:50%;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    background:#c8a455;
+  }
+  .site-cursor.visible{opacity:1}
+  .site-cursor.hover{
+    width:32px;height:32px;
+    background:rgba(200,164,85,.08);
+    border-color:#d3ae5b;
+  }
+}
+
+/* Browser scrollbar + always-visible branded scroll indicator */
+html{
+  scrollbar-width:thin;
+  scrollbar-color:#9b7a39 #080808;
+}
+::-webkit-scrollbar{width:7px !important;height:7px}
+::-webkit-scrollbar-track{background:#080808 !important}
+::-webkit-scrollbar-thumb{
+  background:linear-gradient(180deg,#c8a455,#72592d) !important;
+  border-radius:8px;
+  border:1px solid #080808;
+}
+.scroll-indicator{
+  position:fixed;
+  right:3px;
+  top:88px;
+  bottom:8px;
+  width:3px;
+  z-index:9990;
+  pointer-events:none;
+  background:rgba(255,255,255,.035);
+  border-radius:4px;
+}
+.scroll-indicator-thumb{
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  min-height:34px;
+  border-radius:4px;
+  background:linear-gradient(180deg,#d0aa58,#8a6a32);
+  box-shadow:0 0 8px rgba(200,164,85,.18);
+}
+
+/* Cleaner mobile composition */
+@media(max-width:760px){
+  .scroll-indicator{
+    top:76px;
+    right:2px;
+    bottom:6px;
+    width:3px;
+  }
+
+  .wrap{
+    width:calc(100% - 32px) !important;
+  }
+
+  .site-header{
+    background:rgba(7,7,7,.985) !important;
+    backdrop-filter:blur(10px);
+  }
+  .navbar{
+    min-height:72px !important;
+    height:72px !important;
+    grid-template-columns:1fr auto !important;
+    gap:10px !important;
+  }
+  .logo-btn img{
+    width:142px !important;
+    max-height:58px !important;
+    object-fit:contain !important;
+  }
+  .mobile-toggle{
+    width:44px !important;
+    height:44px !important;
+    display:grid !important;
+    place-items:center !important;
+    padding:0 !important;
+  }
+  .mobile-drawer{
+    padding:10px 16px 18px !important;
+    max-height:calc(100vh - 72px) !important;
+  }
+  .mobile-section{
+    padding:8px 0 !important;
+  }
+  .mobile-section > strong{
+    padding:5px 0 4px !important;
+  }
+  .mobile-drawer a{
+    padding:9px 0 !important;
+    font-size:14px !important;
+    min-height:40px !important;
+  }
+
+  /* hero */
+  .hero{
+    min-height:auto !important;
+    padding:0 !important;
+    background-position:58% center !important;
+  }
+  .hero-content{
+    padding:74px 0 52px !important;
+  }
+  .hero h1{
+    font-size:42px !important;
+    line-height:.97 !important;
+    letter-spacing:-.04em !important;
+    max-width:100% !important;
+  }
+  .hero .deck{
+    font-size:14px !important;
+    line-height:1.62 !important;
+    max-width:94% !important;
+    margin:20px 0 25px !important;
+  }
+  .actions{
+    gap:12px 18px !important;
+  }
+  .outline-btn,.link-btn{
+    font-size:9px !important;
+  }
+
+  /* fact line instead of crowding */
+  .fact-line{
+    padding:18px 0 !important;
+  }
+  .fact-line .wrap{
+    display:block !important;
+  }
+  .fact-line .fact-lead{
+    display:block !important;
+    font-size:18px !important;
+    margin:0 0 6px !important;
+  }
+  .fact-line .fact-sep{
+    display:none !important;
+  }
+  .fact-line .fact-copy{
+    display:block !important;
+    margin-top:8px !important;
+    font-size:9px !important;
+  }
+
+  /* global section spacing */
+  .section,
+  .human-section,
+  .work-editorial,
+  .home-platform,
+  .home-experience,
+  .mortgage-products,
+  .resident-access,
+  .investor-form-section,
+  .division-editorial,
+  .division-bands{
+    padding-top:56px !important;
+    padding-bottom:58px !important;
+  }
+
+  .kicker{
+    margin-bottom:10px !important;
+  }
+  h2,
+  .editorial h2,
+  .work-title h2,
+  .platform-head h2,
+  .home-projects-head h2,
+  .home-experience h2,
+  .mortgage-products-head h2,
+  .resident-head h2{
+    font-size:34px !important;
+    line-height:1.02 !important;
+  }
+
+  /* editorial layouts */
+  .editorial,
+  .two-col,
+  .human-grid,
+  .work-grid,
+  .division-layout,
+  .contact-block,
+  .form-layout,
+  .platform-head,
+  .platform-feature,
+  .experience-feature,
+  .resident-grid,
+  .mortgage-products-head{
+    grid-template-columns:1fr !important;
+    gap:24px !important;
+  }
+
+  .platform-photo,
+  .ops-feature .image,
+  .image-split .media,
+  .project-hero .visual{
+    min-height:260px !important;
+  }
+  .platform-copy,
+  .ops-feature .copy,
+  .image-split .copy,
+  .project-hero .project-copy{
+    padding:34px 18px !important;
+  }
+
+  /* portfolio */
+  .portfolio-grid{
+    grid-template-columns:1fr !important;
+    gap:30px !important;
+  }
+  .portfolio-hero{
+    min-height:330px !important;
+  }
+  .portfolio-hero .inner{
+    padding:62px 0 42px !important;
+  }
+  .portfolio-hero h1{
+    font-size:40px !important;
+  }
+  .portfolio-note{
+    padding:15px 16px !important;
+  }
+  .portfolio-filters{
+    grid-template-columns:1fr !important;
+    gap:10px !important;
+  }
+  .pf-clear{
+    width:100% !important;
+  }
+  .pf-image{
+    aspect-ratio:1.45/1 !important;
+  }
+
+  /* investor intake */
+  .investor-hero{
+    min-height:360px !important;
+  }
+  .investor-hero .wrap{
+    padding-top:66px !important;
+    padding-bottom:44px !important;
+  }
+  .investor-hero h1{
+    font-size:40px !important;
+  }
+  .investor-fit{
+    padding:26px 0 !important;
+  }
+  .investor-fit .wrap{
+    grid-template-columns:1fr !important;
+    gap:28px !important;
+  }
+  .investor-form-shell{
+    grid-template-columns:1fr !important;
+    gap:30px !important;
+  }
+  .investor-aside{
+    position:static !important;
+  }
+  .form-section-block{
+    margin-bottom:28px !important;
+    padding-bottom:28px !important;
+  }
+  .choice-grid,.radio-row,.inv-grid,.form-grid{
+    grid-template-columns:1fr !important;
+  }
+  .choice,.radio-choice{
+    min-height:42px !important;
+  }
+
+  /* mortgage */
+  .loan-list{
+    grid-template-columns:1fr !important;
+  }
+  .loan-item,
+  .loan-item:nth-child(odd),
+  .loan-item:nth-child(even){
+    grid-template-columns:46px 1fr !important;
+    padding:18px 0 !important;
+    border-right:0 !important;
+  }
+
+  /* resident portal */
+  .resident-side{
+    border-left:0 !important;
+    border-top:1px solid #312d26 !important;
+    padding-left:0 !important;
+    padding-top:24px !important;
+  }
+
+  /* footer */
+  .footer{
+    padding-top:42px !important;
+  }
+  .footer-top{
+    grid-template-columns:1fr 1fr !important;
+    gap:28px 18px !important;
+  }
+  .footer-logo{
+    grid-column:1/-1 !important;
+  }
+  .footer-logo img{
+    width:150px !important;
+  }
+  .footer-bottom{
+    margin-top:28px !important;
+  }
+}
+
+@media(max-width:480px){
+  .wrap{width:calc(100% - 24px) !important}
+  .hero h1{font-size:38px !important}
+  .page-hero h1,.portfolio-hero h1,.investor-hero h1{font-size:37px !important}
+  .footer-top{grid-template-columns:1fr !important}
+}
+
+
+/* === Mobile header + hero declutter pass === */
+@media(max-width:760px){
+
+  /* Header: one clean row only */
+  .site-header{
+    background:#070707 !important;
+    border-bottom:1px solid #25221c !important;
+  }
+
+  .navbar{
+    width:calc(100% - 28px) !important;
+    min-height:72px !important;
+    height:72px !important;
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) 46px !important;
+    grid-template-rows:72px !important;
+    align-items:center !important;
+    gap:12px !important;
+    padding:0 !important;
+  }
+
+  .logo-btn{
+    grid-column:1 !important;
+    grid-row:1 !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:flex-start !important;
+    min-width:0 !important;
+    width:max-content !important;
+    max-width:190px !important;
+  }
+
+  .logo-btn img{
+    width:158px !important;
+    max-width:158px !important;
+    max-height:60px !important;
+    object-fit:contain !important;
+    object-position:left center !important;
+  }
+
+  .topnav{
+    display:none !important;
+  }
+
+  .header-action{
+    display:none !important;
+  }
+
+  .mobile-toggle{
+    grid-column:2 !important;
+    grid-row:1 !important;
+    display:grid !important;
+    place-items:center !important;
+    justify-self:end !important;
+    align-self:center !important;
+    width:44px !important;
+    height:44px !important;
+    min-width:44px !important;
+    min-height:44px !important;
+    padding:0 !important;
+    margin:0 !important;
+    border:1px solid #2d2922 !important;
+    background:#0b0b0b !important;
+    color:#e7e0d6 !important;
+    font-size:22px !important;
+    line-height:1 !important;
+  }
+
+  .mobile-drawer{
+    padding:10px 18px 18px !important;
+    max-height:calc(100vh - 72px) !important;
+    overflow-y:auto !important;
+  }
+
+  .mobile-section{
+    padding:8px 0 !important;
+  }
+
+  .mobile-section > strong{
+    padding:5px 0 4px !important;
+    font-size:9px !important;
+  }
+
+  .mobile-drawer a{
+    min-height:40px !important;
+    padding:9px 0 !important;
+    font-size:14px !important;
+  }
+
+  /* Home hero: much shorter and cleaner */
+  [data-view="home"] .hero,
+  body.home-page .hero,
+  .hero{
+    min-height:0 !important;
+    height:auto !important;
+    display:block !important;
+    background-position:58% 50% !important;
+  }
+
+  .hero::before{
+    background:
+      linear-gradient(180deg,rgba(4,4,4,.48) 0%,rgba(4,4,4,.62) 25%,rgba(4,4,4,.90) 100%) !important;
+  }
+
+  .hero-content{
+    padding:56px 0 46px !important;
+  }
+
+  .hero .kicker{
+    margin-bottom:14px !important;
+    font-size:9px !important;
+    letter-spacing:.16em !important;
+  }
+
+  .hero h1{
+    font-size:38px !important;
+    line-height:.98 !important;
+    letter-spacing:-.035em !important;
+    max-width:420px !important;
+  }
+
+  .hero h1 br{
+    display:none !important;
+  }
+
+  .hero .deck{
+    max-width:100% !important;
+    margin:18px 0 24px !important;
+    font-size:14px !important;
+    line-height:1.58 !important;
+    color:#c1bbb2 !important;
+  }
+
+  .hero .actions{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:10px !important;
+    width:100% !important;
+    max-width:330px !important;
+  }
+
+  .hero .outline-btn,
+  .hero .link-btn{
+    width:100% !important;
+    min-height:44px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    text-align:center !important;
+    padding:12px 14px !important;
+    font-size:9px !important;
+    letter-spacing:.13em !important;
+  }
+
+  .hero .link-btn{
+    border:1px solid #363129 !important;
+    border-bottom:1px solid #363129 !important;
+    color:#d7d0c6 !important;
+  }
+
+  /* Replace long desktop fact sentence with a tidy 2x2 mobile strip */
+  .fact-line{
+    padding:0 !important;
+    background:#090909 !important;
+  }
+
+  .fact-line .wrap{
+    width:100% !important;
+    display:grid !important;
+    grid-template-columns:1fr 1fr !important;
+    gap:0 !important;
+  }
+
+  .fact-line .fact-lead,
+  .fact-line .fact-copy{
+    display:block !important;
+    margin:0 !important;
+    padding:16px 14px !important;
+    border-right:1px solid #25221c !important;
+    border-bottom:1px solid #25221c !important;
+    min-height:72px !important;
+  }
+
+  .fact-line .fact-lead{
+    font:400 18px/1.2 Georgia,serif !important;
+    color:#eee7dd !important;
+  }
+
+  .fact-line .fact-copy{
+    font-size:9px !important;
+    line-height:1.45 !important;
+    letter-spacing:.09em !important;
+    text-transform:uppercase !important;
+    color:#8d867c !important;
+  }
+
+  .fact-line .fact-sep{
+    display:none !important;
+  }
+
+  /* If there are only 3 children, keep the final one full width */
+  .fact-line .wrap > :last-child:nth-child(3){
+    grid-column:1 / -1 !important;
+  }
+
+  /* Content blocks: keep one idea per screen */
+  .section,
+  .human-section,
+  .work-editorial,
+  .home-platform,
+  .home-experience,
+  .mortgage-products,
+  .resident-access,
+  .investor-form-section,
+  .division-editorial,
+  .division-bands{
+    padding-top:48px !important;
+    padding-bottom:50px !important;
+  }
+
+  .editorial,
+  .two-col,
+  .human-grid,
+  .work-grid,
+  .division-layout,
+  .contact-block,
+  .form-layout,
+  .platform-head,
+  .platform-feature,
+  .experience-feature,
+  .resident-grid,
+  .mortgage-products-head{
+    gap:20px !important;
+  }
+
+  /* Keep headings from taking over the viewport */
+  h2,
+  .editorial h2,
+  .work-title h2,
+  .platform-head h2,
+  .home-projects-head h2,
+  .home-experience h2,
+  .mortgage-products-head h2,
+  .resident-head h2{
+    font-size:31px !important;
+    line-height:1.03 !important;
+  }
+
+  /* Image-heavy sections shorter on phones */
+  .platform-photo,
+  .ops-feature .image,
+  .image-split .media,
+  .project-hero .visual,
+  .photo-band{
+    min-height:230px !important;
+    height:230px !important;
+  }
+
+  .platform-copy,
+  .ops-feature .copy,
+  .image-split .copy,
+  .project-hero .project-copy{
+    padding:30px 16px !important;
+  }
+
+  /* Portfolio and cards */
+  .portfolio-grid{
+    grid-template-columns:1fr !important;
+    gap:26px !important;
+  }
+
+  .pf-image{
+    aspect-ratio:1.55/1 !important;
+  }
+
+  /* Forms */
+  .form-grid,
+  .inv-grid,
+  .choice-grid,
+  .radio-row{
+    grid-template-columns:1fr !important;
+  }
+
+  .field.full,
+  .inv-field.full{
+    grid-column:auto !important;
+  }
+
+  /* Footer */
+  .footer{
+    padding-top:36px !important;
+  }
+
+  .footer-top{
+    grid-template-columns:1fr 1fr !important;
+    gap:24px 16px !important;
+  }
+
+  .footer-logo{
+    grid-column:1/-1 !important;
+  }
+}
+
+@media(max-width:420px){
+  .navbar{
+    width:calc(100% - 22px) !important;
+  }
+
+  .logo-btn img{
+    width:146px !important;
+    max-width:146px !important;
+  }
+
+  .hero-content{
+    padding:50px 0 40px !important;
+  }
+
+  .hero h1{
+    font-size:35px !important;
+  }
+
+  .hero .deck{
+    font-size:13.5px !important;
+  }
+
+  .fact-line .fact-lead{
+    font-size:17px !important;
+  }
+
+  .footer-top{
+    grid-template-columns:1fr !important;
+  }
+}
+
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://alourdegroup.com/#organization","name":"Alourde Group","url":"https://alourdegroup.com/","telephone":"+1-305-755-2672","email":"Samuelluxama@alourdegroup.com","address":{"@type":"PostalAddress","streetAddress":"909 N Miami Beach Blvd Ste 301-A","addressLocality":"North Miami Beach","addressRegion":"FL","postalCode":"33162","addressCountry":"US"}},{"@type":"WebPage","@id":"https://alourdegroup.com/agent-partnerships/#webpage","url":"https://alourdegroup.com/agent-partnerships/","name":"Real Estate Agent Partnerships | Alourde Group","description":"A direct submission path for agents and brokers with investor-ready listings and off-market real estate opportunities.","isPartOf":{"@id":"https://alourdegroup.com/#website"},"about":{"@id":"https://alourdegroup.com/#organization"},"inLanguage":"en-US"},{"@type":"WebSite","@id":"https://alourdegroup.com/#website","url":"https://alourdegroup.com/","name":"Alourde Group","publisher":{"@id":"https://alourdegroup.com/#organization"},"inLanguage":"en-US"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://alourdegroup.com/"},{"@type":"ListItem","position":2,"name":"Real estate agent partnerships","item":"https://alourdegroup.com/agent-partnerships/"}]}]}</script>
 </head>
 <body>
 <a class="skip-link" href="#mainContent">Skip to main content</a>
+
+<div class="site-cursor" id="siteCursor" aria-hidden="true"></div>
+<div class="scroll-indicator" id="scrollIndicator" aria-hidden="true">
+  <div class="scroll-indicator-thumb" id="scrollIndicatorThumb"></div>
+</div>
+
 
 <header class="site-header">
   <div class="wrap navbar">
@@ -1714,6 +2424,50 @@ main{min-width:0}
   if(create&&residentMsg){
     create.addEventListener('click',()=>residentMsg.textContent='Account creation will connect to the resident management platform.');
   }
+})();
+</script>
+<script>
+(function(){
+  // custom cursor on mouse/trackpad devices
+  const cursor=document.getElementById('siteCursor');
+  if(cursor && window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+    document.addEventListener('mousemove',e=>{
+      cursor.style.left=e.clientX+'px';
+      cursor.style.top=e.clientY+'px';
+      cursor.classList.add('visible');
+    },{passive:true});
+    document.addEventListener('mouseleave',()=>cursor.classList.remove('visible'));
+    document.addEventListener('mouseover',e=>{
+      if(e.target.closest('a,button,input,select,textarea,[role="link"],.pf-card,.portfolio-item,.division-band,.choice,.radio-choice')){
+        cursor.classList.add('hover');
+      }
+    });
+    document.addEventListener('mouseout',e=>{
+      if(e.target.closest('a,button,input,select,textarea,[role="link"],.pf-card,.portfolio-item,.division-band,.choice,.radio-choice')){
+        cursor.classList.remove('hover');
+      }
+    });
+  }
+
+  // visible branded scroll position indicator (works on mobile too)
+  const thumb=document.getElementById('scrollIndicatorThumb');
+  function updateScrollIndicator(){
+    if(!thumb)return;
+    const doc=document.documentElement;
+    const max=Math.max(1,doc.scrollHeight-window.innerHeight);
+    const progress=Math.min(1,Math.max(0,window.scrollY/max));
+    const track=document.getElementById('scrollIndicator');
+    if(!track)return;
+    const trackH=track.clientHeight;
+    const viewportRatio=Math.min(1,window.innerHeight/doc.scrollHeight);
+    const thumbH=Math.max(34,trackH*viewportRatio);
+    const travel=Math.max(0,trackH-thumbH);
+    thumb.style.height=thumbH+'px';
+    thumb.style.transform='translateY('+(travel*progress)+'px)';
+  }
+  updateScrollIndicator();
+  window.addEventListener('scroll',updateScrollIndicator,{passive:true});
+  window.addEventListener('resize',updateScrollIndicator,{passive:true});
 })();
 </script>
 </body>
