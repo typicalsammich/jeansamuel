@@ -2267,6 +2267,25 @@ html{
   }
 }
 
+
+/* === Single scrollbar only: keep branded indicator, hide native browser scrollbar === */
+html{
+  scrollbar-width:none !important;
+  -ms-overflow-style:none !important;
+}
+body{
+  scrollbar-width:none !important;
+  -ms-overflow-style:none !important;
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar{
+  width:0 !important;
+  height:0 !important;
+  display:none !important;
+  background:transparent !important;
+}
+
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://alourdegroup.com/#organization","name":"Alourde Group","url":"https://alourdegroup.com/","telephone":"+1-305-755-2672","email":"Samuelluxama@alourdegroup.com","address":{"@type":"PostalAddress","streetAddress":"909 N Miami Beach Blvd Ste 301-A","addressLocality":"North Miami Beach","addressRegion":"FL","postalCode":"33162","addressCountry":"US"}},{"@type":"WebPage","@id":"https://alourdegroup.com/investor-network/#webpage","url":"https://alourdegroup.com/investor-network/","name":"Join the Alourde Group Investor Network","description":"Join Alourde Group\u2019s investor network to receive curated real estate opportunities matched to your market, asset type, strategy and capital criteria.","isPartOf":{"@id":"https://alourdegroup.com/#website"},"about":{"@id":"https://alourdegroup.com/#organization"},"inLanguage":"en-US"},{"@type":"WebSite","@id":"https://alourdegroup.com/#website","url":"https://alourdegroup.com/","name":"Alourde Group","publisher":{"@id":"https://alourdegroup.com/#organization"},"inLanguage":"en-US"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://alourdegroup.com/"},{"@type":"ListItem","position":2,"name":"Join the Alourde Group investor network","item":"https://alourdegroup.com/investor-network/"}]}]}</script>
 </head>
